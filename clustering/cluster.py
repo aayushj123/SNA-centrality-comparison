@@ -6,21 +6,6 @@ G = nx.generators.random_graphs.erdos_renyi_graph(1000, 0.2, seed=None, directed
 nx.draw(G)
 plt.savefig("Graph.png", format="PNG")
 
-def average_clustering(G, trials=1000):
-	
-	n = len(G)
-	triangles = 0
-	nodes = G.nodes()
-	for i in [int(random.random() * n) for i in range(trials)]:
-		nbrs = list(G[nodes[i]])
-		if len(nbrs) < 2:
-			continue
-		u, v = random.sample(nbrs, 2)
-		if u in G[v]:
-			triangles += 1
-	return triangles / float(trials)
-
-cc=nx.average_clustering(G)
 c=nx.clustering(G)
 
 gc=G.subgraph(max(nx.connected_components(G)))
